@@ -126,11 +126,11 @@ void gameplay()
         //rozgrywaka
         if (userGuess < numberToGuess)
         {
-            cout << "za malo" << endl;
+            cout << "za malo " << randomMessage() << endl;
         }
         else if (userGuess > numberToGuess)
         {
-            cout << "za duzo" << endl;
+            cout << "za duzo " << randomMessage() << endl;
         }
         else
         {
@@ -149,4 +149,18 @@ void gameplay()
     usernames.push_back(username);
     levels.push_back(level);
     trials.push_back(i);
+}
+
+string randomMessage() 
+{
+    srand(time(NULL));
+    int i = rand() %4;
+
+    vector <string> messages = {
+        "Dobry strzal!",
+        "Nastepnym razem sie uda!",
+        "Nie poddawaj sie!",
+        "Juz blisko!"
+    };
+    return messages[i];
 }

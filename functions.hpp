@@ -19,5 +19,6 @@ void sortScoreboard();
 void viewScoreboard();
 void welcome();
 void gameplay();
+std::string randomMessage();
 
 #endif
