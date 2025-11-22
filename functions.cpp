@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 void sortScoreboard()
 {
     for (int i = 0; i < trials.size() - 1; i++)
@@ -24,7 +23,7 @@ void sortScoreboard()
             }
         }
     }
-    
+
     // top 5
     if (trials.size() > 5)
     {
@@ -36,16 +35,32 @@ void sortScoreboard()
 
 void viewScoreboard()
 {
-    
-    if(trials.size() == 0)
+
+    if (trials.size() == 0)
         cout << "brak wynikow" << endl;
-    else 
+    else
     {
         cout << "tabalica wynikow:" << endl;
         sortScoreboard();
         for (int i = 0; i < usernames.size(); i++)
         {
             cout << usernames[i] << " | " << levels[i] << " | " << trials[i] << endl;
+        }
+        cout << "czy chcesz sortowac wyniki wedlug poziomu trudnosci? (t/n): ";
+        string input;
+        cin >> input;
+        if (input == "t")
+        {
+            cout << "podaj poziom trudnosci (latwy/sredni/trudny): ";
+            cin >> input;
+            cout << "wyniki dla poziomu " << input << ":" << endl;
+            for (int i = 0; i < usernames.size(); i++)
+            {
+                if (levels[i] == input)
+                {
+                    cout << usernames[i] << " | " << levels[i] << " | " << trials[i] << endl;
+                }
+            }
         }
     }
 }
@@ -89,7 +104,14 @@ void welcome()
     }
     else if (action == "b")
     {
-        viewScoreboard();
+        while (true)
+        {
+            viewScoreboard();
+            cout << "wrocic do menu? (t/n): ";
+            cin >> action;
+            if (action == "t")
+                break;
+        }
     }
     else
     {
@@ -106,19 +128,19 @@ void gameplay()
         cout << "proba " << i << " podaj liczbe: ";
         cin >> input;
 
-        //sprawdzanie czy podana wartosc jest liczba
+        // sprawdzanie czy podana wartosc jest liczba
         bool typeCheck = true;
-        for (int i = 0; i < input.size(); i++) 
+        for (int i = 0; i < input.size(); i++)
         {
             char c = input[i];
-            if (!isdigit(c)) 
+            if (!isdigit(c))
             {
                 typeCheck = false;
                 break;
             }
         }
 
-        if (!typeCheck) 
+        if (!typeCheck)
         {
             cout << "Podana wartosc nie jest liczba!" << endl;
             continue;
@@ -126,7 +148,7 @@ void gameplay()
 
         int userGuess = stoi(input);
 
-        //rozgrywaka
+        // rozgrywaka
         if (userGuess < numberToGuess)
         {
             cout << "za malo " << randomMessage() << endl;
@@ -172,27 +194,26 @@ void betMode()
         cout << "w ile prob odgadniesz liczbe? ";
         cin >> bet;
     }
-    else if(input == "n")
+    else if (input == "n")
     {
         isBetMode = false;
     }
-    else 
+    else
     {
         cout << "nieprawidlowa odpowiedz, tryb zakladow wylaczony" << endl;
         isBetMode = false;
     }
 }
 
-string randomMessage() 
+string randomMessage()
 {
     srand(time(NULL));
-    int i = rand() %4;
+    int i = rand() % 4;
 
-    vector <string> messages = {
+    vector<string> messages = {
         "Dobry strzal!",
         "Nastepnym razem sie uda!",
         "Nie poddawaj sie!",
-        "Juz blisko!"
-    };
+        "Juz blisko!"};
     return messages[i];
 }

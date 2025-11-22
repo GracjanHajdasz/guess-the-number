@@ -28,7 +28,23 @@ int main()
         else
             gameplay();
         guessed = false;
+        if (!playing)
+        {
+            string again;
+            cout << "czy chcesz zagrac ponownie? (t/n): ";
+            cin >> again;
+            if (again == "n" || again == "N")
+                break;
+            else if (again == "t" || again == "T")
+            {
+                continue;
+            }
+            else
+            {
+                cout << "nieprawidlowa odpowiedz, konczenie gry." << endl;
+                break;
+            }
+        }
     }
-
     return 0;
 }
