@@ -65,18 +65,21 @@ void welcome()
         {
             numberToGuess = rand() % 51;
             level = "latwy";
+            betMode();
             playing = true;
         }
         else if (action == "sredni")
         {
             numberToGuess = rand() % 101;
             level = "sredni";
+            betMode();
             playing = true;
         }
         else if (action == "trudny")
         {
             numberToGuess = rand() % 201;
             level = "trudny";
+            betMode();
             playing = true;
         }
         else
@@ -141,14 +144,43 @@ void gameplay()
         }
 
         i++;
+
+        if (isBetMode && i > bet)
+            cout << "przekroczyles liczbe prob z trybu zakladow, przegrales zaklad!" << endl;
     }
 
     playing = false;
+    if (isBetMode && i <= bet)
+        cout << "wygrales zaklad!" << endl;
     i--;
 
     usernames.push_back(username);
     levels.push_back(level);
     trials.push_back(i);
+}
+
+void betMode()
+{
+    string input;
+    cout << "czy chcesz zagrac w trybie zakladow? (t/n): ";
+    cin >> input;
+
+    if (input == "t")
+    {
+        isBetMode = true;
+        cout << "tryb zakladow wlaczony!" << endl;
+        cout << "w ile prob odgadniesz liczbe? ";
+        cin >> bet;
+    }
+    else if(input == "n")
+    {
+        isBetMode = false;
+    }
+    else 
+    {
+        cout << "nieprawidlowa odpowiedz, tryb zakladow wylaczony" << endl;
+        isBetMode = false;
+    }
 }
 
 string randomMessage() 

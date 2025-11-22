@@ -3,9 +3,12 @@
 
 using namespace std;
 
-bool guessed = false;
 int numberToGuess;
+int bet;
+
+bool guessed = false;
 bool playing = false;
+bool isBetMode = false;
 
 // scoreboard
 string username;
@@ -17,7 +20,6 @@ vector<int> trials;
 
 int main()
 {
-
     while (true)
     {
 
@@ -28,6 +30,5 @@ int main()
         guessed = false;
     }
 
-    system("pause");
     return 0;
 }

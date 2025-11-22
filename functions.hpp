@@ -4,9 +4,12 @@
 #include <string>
 #include <vector>
 
-extern bool guessed;
 extern int numberToGuess;
+extern int bet;
+
+extern bool guessed;
 extern bool playing;
+extern bool isBetMode;
 
 extern std::string username;
 extern std::string level;
@@ -19,6 +22,7 @@ void sortScoreboard();
 void viewScoreboard();
 void welcome();
 void gameplay();
+void betMode();
 std::string randomMessage();
 
 #endif
