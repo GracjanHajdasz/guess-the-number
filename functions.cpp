@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include "functions.hpp"
+#include <cctype>
 
 using namespace std;
 
@@ -98,11 +99,31 @@ void gameplay()
     int i = 1;
     while (!guessed)
     {
-
-        int userGuess;
-
+        string input;
         cout << "proba " << i << " podaj liczbe: ";
-        cin >> userGuess;
+        cin >> input;
+
+        //sprawdzanie czy podana wartosc jest liczba
+        bool typeCheck = true;
+        for (int i = 0; i < input.size(); i++) 
+        {
+            char c = input[i];
+            if (!isdigit(c)) 
+            {
+                typeCheck = false;
+                break;
+            }
+        }
+
+        if (!typeCheck) 
+        {
+            cout << "Podana wartosc nie jest liczba!" << endl;
+            continue;
+        }
+
+        int userGuess = stoi(input);
+
+        //rozgrywaka
         if (userGuess < numberToGuess)
         {
             cout << "za malo" << endl;
@@ -118,8 +139,10 @@ void gameplay()
             cin >> username;
             guessed = true;
         }
+
         i++;
     }
+
     playing = false;
     i--;
 
