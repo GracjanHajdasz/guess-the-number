@@ -22,7 +22,6 @@ int main()
 {
     while (true)
     {
-
         if (!playing)
             welcome();
         else
