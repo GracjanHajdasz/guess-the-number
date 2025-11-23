@@ -103,12 +103,18 @@ void viewScoreboard()
         {
             cout << "podaj poziom trudnosci (latwy/sredni/trudny): ";
             cin >> input;
-            cout << "wyniki dla poziomu " << input << ":" << endl;
-            for (int i = 0; i < usernames.size(); i++)
+            if(count(levels.begin(), levels.end(), input) == 0)
             {
-                if (levels[i] == input)
+                cout << "brak wynikow dla podanego poziomu trudnosci" << endl;
+                return;
+            } else {
+                cout << "wyniki dla poziomu " << input << ":" << endl;
+                for (int i = 0; i < usernames.size(); i++)
                 {
-                    cout << usernames[i] << " | " << levels[i] << " | " << trials[i] << endl;
+                    if (levels[i] == input)
+                    {
+                        cout << usernames[i] << " | " << levels[i] << " | " << trials[i] << endl;
+                    }
                 }
             }
         }
@@ -217,8 +223,10 @@ void gameplay()
 
         i++;
 
-        if (isBetMode && i > bet)
+        if (isBetMode && i > bet){
             cout << "przekroczyles liczbe prob z trybu zakladow, przegrales zaklad!" << endl;
+            isBetMode = false;
+        }
     }
 
     playing = false;
