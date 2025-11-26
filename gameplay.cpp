@@ -10,117 +10,6 @@
 
 using namespace std;
 
-void writeToFile() {
-    ofstream file("scoreboard.txt");
-
-    if (!file.is_open()) {
-        cout << "Nie mozna otworzyc pliku scoreboard.txt do zapisu" << endl;
-        return;
-    } else {
-        for (int i = 0; i < usernames.size(); i++) {
-            file << usernames[i] << "," << levels[i] << "," <<to_string(trials[i]) << endl;
-        }
-    }
-
-    file.close();
-}
-
-void readFile() {
-    ifstream file("scoreboard.txt");
-    
-    if (!file.is_open()) {
-        cout << "Nie mozna otworzyc pliku scoreboard.txt" << endl;
-        return;
-    } else {
-        string uname, lvl, trl;  //username, level, trials as strings
-        string text;
-
-        usernames.clear();
-        levels.clear();
-        trials.clear();
-
-        while (getline(file, text)) {
-            size_t pos1 = text.find(",");
-            size_t pos2 = text.find(",", pos1 + 1);
-            
-            //pobieranie wartosci
-            uname = text.substr(0, pos1);
-            lvl = text.substr(pos1 + 1, pos2 - pos1 - 1);
-            trl = text.substr(pos2 + 1);
-            
-            //dodawanie do wektorow
-            usernames.push_back(uname);
-            levels.push_back(lvl);
-            trials.push_back(stoi(trl));
-        }
-    }
-    
-    file.close();
-}
-
-void sortScoreboard()
-{
-    readFile();
-    for (int i = 0; i < trials.size() - 1; i++)
-    {
-        for (int j = 0; j < trials.size() - i - 1; j++)
-        {
-            if (trials[j] > trials[j + 1])
-            {
-                swap(trials[j], trials[j + 1]);
-                swap(usernames[j], usernames[j + 1]);
-                swap(levels[j], levels[j + 1]);
-            }
-        }
-    }
-
-    // top 5
-    if (trials.size() > 5)
-    {
-        trials.resize(5);
-        usernames.resize(5);
-        levels.resize(5);
-    }
-}
-
-void viewScoreboard()
-{
-
-    if (trials.size() == 0)
-        cout << "brak wynikow" << endl;
-    else
-    {
-        cout << "tabalica wynikow:" << endl;
-        sortScoreboard();
-        for (int i = 0; i < usernames.size(); i++)
-        {
-            cout << usernames[i] << " | " << levels[i] << " | " << trials[i] << endl;
-        }
-        cout << "czy chcesz sortowac wyniki wedlug poziomu trudnosci? (t/n): ";
-        string input;
-        cin >> input;
-        if (input == "t")
-        {
-            cout << "podaj poziom trudnosci (latwy/sredni/trudny): ";
-            cin >> input;
-            if(count(levels.begin(), levels.end(), input) == 0)
-            {
-                cout << "brak wynikow dla podanego poziomu trudnosci" << endl;
-                return;
-            } else {
-                cout << "wyniki dla poziomu " << input << ":" << endl;
-                for (int i = 0; i < usernames.size(); i++)
-                {
-                    if (levels[i] == input)
-                    {
-                        cout << usernames[i] << " | " << levels[i] << " | " << trials[i] << endl;
-                    }
-                }
-            }
-        }
-    }
-}
-
 void welcome()
 {
     srand(time(NULL));
@@ -223,7 +112,8 @@ void gameplay()
 
         i++;
 
-        if (isBetMode && i > bet){
+        if (isBetMode && i > bet)
+        {
             cout << "przekroczyles liczbe prob z trybu zakladow, przegrales zaklad!" << endl;
             isBetMode = false;
         }

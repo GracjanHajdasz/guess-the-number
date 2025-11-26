@@ -24,5 +24,7 @@ void welcome();
 void gameplay();
 void betMode();
 std::string randomMessage();
+void readFile();
+void writeToFile();
 
 #endif
