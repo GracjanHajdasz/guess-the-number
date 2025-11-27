@@ -1,28 +1,19 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 #include <string>
-#include <vector>
-#include <algorithm>
 #include "functions.hpp"
-#include <cctype>
 #include <fstream>
 
 using namespace std;
 
-void writeToFile()
-{
+void writeToFile() {
     ofstream file("scoreboard.txt");
 
-    if (!file.is_open())
-    {
+    if (!file.is_open()) {
         cout << "Nie mozna otworzyc pliku scoreboard.txt do zapisu" << endl;
         return;
     }
-    else
-    {
-        for (int i = 0; i < usernames.size(); i++)
-        {
+    else {
+        for (int i = 0; i < usernames.size(); i++) {
             file << usernames[i] << "," << levels[i] << "," << to_string(trials[i]) << endl;
         }
     }
@@ -30,17 +21,14 @@ void writeToFile()
     file.close();
 }
 
-void readFile()
-{
+void readFile() {
     ifstream file("scoreboard.txt");
 
-    if (!file.is_open())
-    {
+    if (!file.is_open()) {
         cout << "Nie mozna otworzyc pliku scoreboard.txt" << endl;
         return;
     }
-    else
-    {
+    else {
         string uname, lvl, trl; // username, level, trials as strings
         string text;
 
@@ -48,8 +36,7 @@ void readFile()
         levels.clear();
         trials.clear();
 
-        while (getline(file, text))
-        {
+        while (getline(file, text)) {
             size_t pos1 = text.find(",");
             size_t pos2 = text.find(",", pos1 + 1);
 

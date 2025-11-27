@@ -3,90 +3,74 @@
 #include <ctime>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include "functions.hpp"
 #include <cctype>
-#include <fstream>
 
 using namespace std;
 
-void welcome()
-{
+void welcome() {
     srand(time(NULL));
     string action;
 
     cout << "a - rozpocznij gre\nb - tablica wynikow" << endl;
     cin >> action;
-    if (action == "a")
-    {
+    if (action == "a" || action == "A") {
         cout << "wybierz poziom trudnosci: latwy[1-50], sredni[1-100], trudny[1-200]" << endl;
         cin >> action;
-        if (action == "latwy")
-        {
+        if (action == "latwy" || action == "LATWY") {
             numberToGuess = rand() % 51;
             level = "latwy";
             betMode();
             playing = true;
         }
-        else if (action == "sredni")
-        {
+        else if (action == "sredni" || action == "SREDNI") {
             numberToGuess = rand() % 101;
             level = "sredni";
             betMode();
             playing = true;
         }
-        else if (action == "trudny")
-        {
+        else if (action == "trudny" || action == "TRUDNY") {
             numberToGuess = rand() % 201;
             level = "trudny";
             betMode();
             playing = true;
         }
-        else
-        {
+        else {
             cout << "nieprawidlowy poziom trudnosci" << endl;
         }
     }
-    else if (action == "b")
-    {
-        while (true)
-        {
+    else if (action == "b" || action == "B") {
+        while (true) {
             viewScoreboard();
             cout << "wrocic do menu? (t/n): ";
             cin >> action;
-            if (action == "t")
+            if (action == "t" || action == "T")
                 break;
         }
     }
-    else
-    {
+    else {
         cout << "nieprawidlowa akcja" << endl;
     }
 }
 
-void gameplay()
-{
+void gameplay() {
     int i = 1;
-    while (!guessed)
-    {
+    while (!guessed) {
         string input;
         cout << "proba " << i << " podaj liczbe: ";
         cin >> input;
 
         // sprawdzanie czy podana wartosc jest liczba
         bool typeCheck = true;
-        for (int i = 0; i < input.size(); i++)
-        {
+        for (int i = 0; i < input.size(); i++) {
             char c = input[i];
-            if (!isdigit(c))
-            {
+            if (!isdigit(c)) {
                 typeCheck = false;
                 break;
             }
         }
 
-        if (!typeCheck)
-        {
+        if (!typeCheck) {
             cout << "Podana wartosc nie jest liczba!" << endl;
             continue;
         }
@@ -94,16 +78,13 @@ void gameplay()
         int userGuess = stoi(input);
 
         // rozgrywaka
-        if (userGuess < numberToGuess)
-        {
+        if (userGuess < numberToGuess) {
             cout << "za malo " << randomMessage() << endl;
         }
-        else if (userGuess > numberToGuess)
-        {
+        else if (userGuess > numberToGuess) {
             cout << "za duzo " << randomMessage() << endl;
         }
-        else
-        {
+        else {
             cout << "odgadles liczbe w " << i << " probie" << endl;
             cout << "podaj swoje imie: ";
             cin >> username;
@@ -112,8 +93,7 @@ void gameplay()
 
         i++;
 
-        if (isBetMode && i > bet)
-        {
+        if (isBetMode && i > bet) {
             cout << "przekroczyles liczbe prob z trybu zakladow, przegrales zaklad!" << endl;
             isBetMode = false;
         }
@@ -130,32 +110,27 @@ void gameplay()
     writeToFile();
 }
 
-void betMode()
-{
+void betMode() {
     string input;
     cout << "czy chcesz zagrac w trybie zakladow? (t/n): ";
     cin >> input;
 
-    if (input == "t")
-    {
+    if (input == "t" || input == "T") {
         isBetMode = true;
         cout << "tryb zakladow wlaczony!" << endl;
         cout << "w ile prob odgadniesz liczbe? ";
         cin >> bet;
     }
-    else if (input == "n")
-    {
+    else if (input == "n" || input == "N") {
         isBetMode = false;
     }
-    else
-    {
+    else {
         cout << "nieprawidlowa odpowiedz, tryb zakladow wylaczony" << endl;
         isBetMode = false;
     }
 }
 
-string randomMessage()
-{
+string randomMessage() {
     srand(time(NULL));
     int i = rand() % 4;
 
