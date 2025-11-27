@@ -1,24 +1,51 @@
-# guess-the-number
+# Number Guessing Game (C++)
 
-# Uruchomienie
-Należy skompilować pliki "main.cpp" oraz "functions.cpp" następnie uruchomić plik "a.exe".
+Interaktywna gra konsolowa napisana w C++.
+Zadaniem gracza jest odgadnąć losową liczbę, a wyniki zapisywane są w tablicy wyników.
 
+# Funkcjonalności
 # Rozgrywka
-  *ekran początkowy*
-  wpisz "a" aby rozpocząć grę,
-  wpisz "b" aby sprawdzić tabelę wyników
 
-  *wybór poziomu trudności*
-  wpisz:
-  "latwy" - aby wybrać łatwy pozionm trudności,
-  "sredni" - aby wybrać średni poziom trudności,
-  "trudny" - aby wybrać trudny poziom trudności
+trzy poziomy trudności: łatwy (1–50), średni (1–100), trudny (1–200)
 
-  *tryb zakładu*
-  po wybraniu poziomu trudności:
-    "t" - aby uruchomić tryb zakładu,
-    "n" - aby nie uruchamiać trybu zakładu
-  następnie wprowadź ilość prób w których chcesz odgadnąć wylosowaną liczbę
+walidacja danych wejściowych
 
-  *podczas rozgrywki wpisuj liczby do momentu odgadnięcia, na koniec podaj swoje imie, które bedzie zapisane w tablicy wyników.
-  Po zakończeniu rozgrywki zostaniesz automatyzcnie przeniesisony do ekranu początkowego*
+losowe komunikaty motywujące
+
+# Tryb zakładów
+
+gracz może obstawić, w ilu próbach odgadnie liczbę
+
+jeśli zmieści się w limicie — wygrywa zakład
+
+# Tablica wyników
+
+zapis do pliku scoreboard.txt
+
+sortowanie wyników po liczbie prób (rosnąco)
+
+wyświetlanie TOP 5
+
+filtrowanie po poziomie trudności
+
+# Struktura projektu
+main.cpp
+gameplay.cpp
+scoreboardoperations.cpp
+fileoperations.cpp
+functions.hpp
+scoreboard.txt
+
+# Kompilacja
+Linux / macOS
+g++ main.cpp gameplay.cpp scoreboardoperations.cpp fileoperations.cpp -o game
+./game
+
+Windows (MinGW)
+g++ main.cpp gameplay.cpp scoreboardoperations.cpp fileoperations.cpp -o game.exe
+game.exe
+
+# Przykładowy scoreboard.txt
+Gracjan,latwy,3
+Ola,sredni,7
+Kamil,trudny,12
