@@ -3,10 +3,8 @@
 #include <ctime>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include "functions.hpp"
 #include <cctype>
-#include <fstream>
 
 using namespace std;
 
@@ -15,54 +13,32 @@ void welcome()
     srand(time(NULL));
     string action;
 
-    cout << "a - rozpocznij gre\n";
-    if (usernames.size() > 0)
-        cout << "b - wyswietl tablice wynikow\n";
+    cout << "wybierz poziom trudnosci: latwy[1-50], sredni[1-100], trudny[1-200]" << endl;
     cin >> action;
-    if (action == "a")
+    if (action == "latwy" || action == "LATWY")
     {
-        cout << "wybierz poziom trudnosci: latwy[1-50], sredni[1-100], trudny[1-200]" << endl;
-        cin >> action;
-        if (action == "latwy")
-        {
-            numberToGuess = rand() % 51;
-            level = "latwy";
-            betMode();
-            playing = true;
-        }
-        else if (action == "sredni")
-        {
-            numberToGuess = rand() % 101;
-            level = "sredni";
-            betMode();
-            playing = true;
-        }
-        else if (action == "trudny")
-        {
-            numberToGuess = rand() % 201;
-            level = "trudny";
-            betMode();
-            playing = true;
-        }
-        else
-        {
-            cout << "nieprawidlowy poziom trudnosci" << endl;
-        }
+        numberToGuess = rand() % 51;
+        level = "latwy";
+        betMode();
+        playing = true;
     }
-    else if (action == "b")
+    else if (action == "sredni" || action == "SREDNI")
     {
-        while (true)
-        {
-            viewScoreboard();
-            cout << "wrocic do menu? (t/n): ";
-            cin >> action;
-            if (action == "t")
-                break;
-        }
+        numberToGuess = rand() % 101;
+        level = "sredni";
+        betMode();
+        playing = true;
+    }
+    else if (action == "trudny" || action == "TRUDNY")
+    {
+        numberToGuess = rand() % 201;
+        level = "trudny";
+        betMode();
+        playing = true;
     }
     else
     {
-        cout << "nieprawidlowa akcja" << endl;
+        cout << "nieprawidlowy poziom trudnosci" << endl;
     }
 }
 
@@ -138,14 +114,14 @@ void betMode()
     cout << "czy chcesz zagrac w trybie zakladow? (t/n): ";
     cin >> input;
 
-    if (input == "t")
+    if (input == "t" || input == "T")
     {
         isBetMode = true;
         cout << "tryb zakladow wlaczony!" << endl;
         cout << "w ile prob odgadniesz liczbe? ";
         cin >> bet;
     }
-    else if (input == "n")
+    else if (input == "n" || input == "N")
     {
         isBetMode = false;
     }

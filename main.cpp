@@ -1,5 +1,6 @@
 #include <iostream>
 #include "functions.hpp"
+#include "ui.hpp"
 
 using namespace std;
 
@@ -20,30 +21,43 @@ vector<int> trials;
 
 int main()
 {
+    string choice;
+
     while (true)
     {
-        if (!playing)
-            welcome();
-        else
-            gameplay();
-        guessed = false;
-        if (!playing)
+        UI::clear();
+        UI::header("GUESS THE NUMBER");
+        UI::menu();
+        cin >> choice;
+
+        if (choice == "1")
         {
-            string again;
-            cout << "Wrocic do menu? (t/n): ";
-            cin >> again;
-            if (again == "n" || again == "N")
-                break;
-            else if (again == "t" || again == "T")
-            {
-                continue;
-            }
-            else
-            {
-                cout << "nieprawidlowa odpowiedz, konczenie gry." << endl;
-                break;
-            }
+            UI::clear();
+            UI::header("START GRY");
+            welcome(); // Twoja funkcja welcome()
+            if (playing)
+                gameplay(); // Twoja funkcja gameplay()
+            guessed = false;
+        }
+        else if (choice == "2")
+        {
+            UI::clear();
+            UI::header("TABLICA WYNIKOW");
+            readFile(); // wczytaj aktualne wyniki
+            viewScoreboard();
+            UI::pause();
+        }
+        else if (choice == "0")
+        {
+            UI::info("Do zobaczenia!");
+            break;
+        }
+        else
+        {
+            UI::error("Nieprawidlowy wybor!");
+            UI::pause();
         }
     }
+
     return 0;
 }
