@@ -1,4 +1,5 @@
 #include "ui.hpp"
+#include "functions.hpp"
 #include <iostream>
 
 namespace UI
@@ -34,8 +35,8 @@ namespace UI
     {
         std::cout << "\n";
         std::cout << "[1] Rozpocznij gre\n";
-        std::cout << "[2] Zasady gry\n";
-        std::cout << "[3] Tablica wynikow\n";
+        if (usernames.size() > 0)
+            std::cout << "[2] Tablica wynikow\n";
         std::cout << "[0] Wyjscie\n";
         std::cout << "\nTwoj wybor: ";
     }
