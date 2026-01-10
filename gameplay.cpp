@@ -15,7 +15,9 @@ void welcome()
     srand(time(NULL));
     string action;
 
-    cout << "a - rozpocznij gre\nb - tablica wynikow" << endl;
+    cout << "a - rozpocznij gre\n";
+    if (usernames.size() > 0)
+        cout << "b - wyswietl tablice wynikow\n";
     cin >> action;
     if (action == "a")
     {

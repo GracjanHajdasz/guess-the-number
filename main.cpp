@@ -30,7 +30,7 @@ int main()
         if (!playing)
         {
             string again;
-            cout << "czy chcesz zagrac ponownie? (t/n): ";
+            cout << "Wrocic do menu? (t/n): ";
             cin >> again;
             if (again == "n" || again == "N")
                 break;
