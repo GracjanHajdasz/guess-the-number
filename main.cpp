@@ -34,16 +34,16 @@ int main()
         {
             UI::clear();
             UI::header("START GRY");
-            welcome(); // Twoja funkcja welcome()
+            welcome(); 
             if (playing)
-                gameplay(); // Twoja funkcja gameplay()
+                gameplay(); 
             guessed = false;
         }
         else if (choice == "2")
         {
             UI::clear();
             UI::header("TABLICA WYNIKOW");
-            readFile(); // wczytaj aktualne wyniki
+            readFile();
             viewScoreboard();
             UI::pause();
         }
